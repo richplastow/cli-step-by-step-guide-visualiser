@@ -13,6 +13,11 @@
   "scripts": {
     "test": "node test.mjs"
   },
+  "dependencies": {
+    "highlight.js": "^11",
+    "marked": "^15",
+    "marked-highlight": "^2.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/richplastow/cli-step-by-step-guide-visualiser.git"

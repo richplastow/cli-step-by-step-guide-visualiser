@@ -22,14 +22,36 @@ This is just an example step-by-step guide.
 ## Step 1: Check that `my-command` is installed
 
 ```bash
-# The `--version` or `-v` flag will makes my-command exit without doing anything.
+# The `--version` or `-v` flag makes my-command exit without doing anything.
 my-command --version
 # v1.2.3
 ```
 ````
 
 Running `node ./visualise.js docs/guides/how-to-use-my-command.md` generates
-a docs/guides/how-to-use-my-command.html file - a much more user-friendly way to
-work with the step-by-step guide:
+a docs/guides/how-to-use-my-command.html file - a much more user-friendly way
+to work with the step-by-step guide.
+
+Run `open docs/guides/how-to-use-my-command.html` to view it in your browser:
 
 <!-- TODO animated gif of the output -->
+
+## Install dependencies and Test
+
+After cloning the repo, run the following commands to build and test:
+
+```bash
+npm install
+# added 3 packages, and audited 4 packages in 5s
+# 
+# found 0 vulnerabilities
+
+npm test
+# > cli-step-by-step-guide-visualiser@0.0.1 test
+# > node test.mjs
+# 
+# 
+# ✅ All tests passed
+```
+
+<!-- node_modules/ is 6,228,861 bytes (10.4 MB on disk) for 1,601 items -->
