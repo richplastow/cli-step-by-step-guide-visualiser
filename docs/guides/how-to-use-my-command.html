@@ -6,6 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to use `my-command`</title>
 <style>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  background-color: #ccc;
+  color: #333;
+}
+body.CSbSGV-dark {
+  background-color: #333;
+  color: #ccc;
+}
 pre code.hljs {
   display: block;
   overflow-x: auto;
@@ -14,54 +26,99 @@ pre code.hljs {
 code.hljs {
   padding: 3px 5px
 }
-/*
+/*!
+  Theme: StackOverflow Light
+  Description: Light theme as used on stackoverflow.com
+  Author: stackoverflow.com
+  Maintainer: @Hirse
+  Website: https://github.com/StackExchange/Stacks
+  License: MIT
+  Updated: 2021-05-15
 
-Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
-
+  Updated for @stackoverflow/stacks v0.64.0
+  Code Blocks: /blob/v0.64.0/lib/css/components/_stacks-code-blocks.less
+  Colors: /blob/v0.64.0/lib/css/exports/_stacks-constants-colors.less
 */
 .hljs {
-  background: white;
-  color: black
+  /* var(--highlight-color) */
+  color: #2f3337;
+  /* var(--highlight-bg) */
+  background: #f6f6f6
 }
-.hljs-comment,
-.hljs-quote,
-.hljs-variable {
-  color: #008000
+.hljs-subst {
+  /* var(--highlight-color) */
+  color: #2f3337
+}
+.hljs-comment {
+  /* var(--highlight-comment) */
+  color: #656e77
 }
 .hljs-keyword,
 .hljs-selector-tag,
-.hljs-built_in,
-.hljs-name,
-.hljs-tag {
-  color: #00f
-}
-.hljs-string,
-.hljs-title,
-.hljs-section,
-.hljs-attribute,
-.hljs-literal,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-type,
-.hljs-addition {
-  color: #a31515
-}
-.hljs-deletion,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-meta {
-  color: #2b91af
-}
-.hljs-doctag {
-  color: #808080
+.hljs-meta .hljs-keyword,
+.hljs-doctag,
+.hljs-section {
+  /* var(--highlight-keyword) */
+  color: #015692
 }
 .hljs-attr {
-  color: #f00
+  /* var(--highlight-attribute); */
+  color: #015692
 }
+.hljs-attribute {
+  /* var(--highlight-symbol) */
+  color: #803378
+}
+.hljs-name,
+.hljs-type,
+.hljs-number,
+.hljs-selector-id,
+.hljs-quote,
+.hljs-template-tag {
+  /* var(--highlight-namespace) */
+  color: #b75501
+}
+.hljs-selector-class {
+  /* var(--highlight-keyword) */
+  color: #015692
+}
+.hljs-string,
+.hljs-regexp,
 .hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr {
+  /* var(--highlight-variable) */
+  color: #54790d
+}
+.hljs-meta,
+.hljs-selector-pseudo {
+  /* var(--highlight-keyword) */
+  color: #015692
+}
+.hljs-built_in,
+.hljs-title,
+.hljs-literal {
+  /* var(--highlight-literal) */
+  color: #b75501
+}
 .hljs-bullet,
-.hljs-link {
-  color: #00b0e8
+.hljs-code {
+  /* var(--highlight-punctuation) */
+  color: #535a60
+}
+.hljs-meta .hljs-string {
+  /* var(--highlight-variable) */
+  color: #54790d
+}
+.hljs-deletion {
+  /* var(--highlight-deletion) */
+  color: #c02d2e
+}
+.hljs-addition {
+  /* var(--highlight-addition) */
+  color: #2f6f44
 }
 .hljs-emphasis {
   font-style: italic
@@ -69,9 +126,144 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
 .hljs-strong {
   font-weight: bold
 }
+.hljs-formula,
+.hljs-operator,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
+  /* purposely ignored */
+  
+}
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
+/*!
+  Theme: StackOverflow Dark
+  Description: Dark theme as used on stackoverflow.com
+  Author: stackoverflow.com
+  Maintainer: @Hirse
+  Website: https://github.com/StackExchange/Stacks
+  License: MIT
+  Updated: 2021-05-15
+
+  Updated for @stackoverflow/stacks v0.64.0
+  Code Blocks: /blob/v0.64.0/lib/css/components/_stacks-code-blocks.less
+  Colors: /blob/v0.64.0/lib/css/exports/_stacks-constants-colors.less
+*/
+.CSbSGV-dark .hljs {
+  /* var(--highlight-color) */
+  color: #ffffff;
+  /* var(--highlight-bg) */
+  background: #1c1b1b
+}
+.CSbSGV-dark .hljs-subst {
+  /* var(--highlight-color) */
+  color: #ffffff
+}
+.CSbSGV-dark .hljs-comment {
+  /* var(--highlight-comment) */
+  color: #999999
+}
+.CSbSGV-dark .hljs-keyword,
+.CSbSGV-dark .hljs-selector-tag,
+.CSbSGV-dark .hljs-meta .hljs-keyword,
+.CSbSGV-dark .hljs-doctag,
+.CSbSGV-dark .hljs-section {
+  /* var(--highlight-keyword) */
+  color: #88aece
+}
+.CSbSGV-dark .hljs-attr {
+  /* var(--highlight-attribute); */
+  color: #88aece
+}
+.CSbSGV-dark .hljs-attribute {
+  /* var(--highlight-symbol) */
+  color: #c59bc1
+}
+.CSbSGV-dark .hljs-name,
+.CSbSGV-dark .hljs-type,
+.CSbSGV-dark .hljs-number,
+.CSbSGV-dark .hljs-selector-id,
+.CSbSGV-dark .hljs-quote,
+.CSbSGV-dark .hljs-template-tag {
+  /* var(--highlight-namespace) */
+  color: #f08d49
+}
+.CSbSGV-dark .hljs-selector-class {
+  /* var(--highlight-keyword) */
+  color: #88aece
+}
+.CSbSGV-dark .hljs-string,
+.CSbSGV-dark .hljs-regexp,
+.CSbSGV-dark .hljs-symbol,
+.CSbSGV-dark .hljs-variable,
+.CSbSGV-dark .hljs-template-variable,
+.CSbSGV-dark .hljs-link,
+.CSbSGV-dark .hljs-selector-attr {
+  /* var(--highlight-variable) */
+  color: #b5bd68
+}
+.CSbSGV-dark .hljs-meta,
+.CSbSGV-dark .hljs-selector-pseudo {
+  /* var(--highlight-keyword) */
+  color: #88aece
+}
+.CSbSGV-dark .hljs-built_in,
+.CSbSGV-dark .hljs-title,
+.CSbSGV-dark .hljs-literal {
+  /* var(--highlight-literal) */
+  color: #f08d49
+}
+.CSbSGV-dark .hljs-bullet,
+.CSbSGV-dark .hljs-code {
+  /* var(--highlight-punctuation) */
+  color: #cccccc
+}
+.CSbSGV-dark .hljs-meta .hljs-string {
+  /* var(--highlight-variable) */
+  color: #b5bd68
+}
+.CSbSGV-dark .hljs-deletion {
+  /* var(--highlight-deletion) */
+  color: #de7176
+}
+.CSbSGV-dark .hljs-addition {
+  /* var(--highlight-addition) */
+  color: #76c490
+}
+.CSbSGV-dark .hljs-emphasis {
+  font-style: italic
+}
+.CSbSGV-dark .hljs-strong {
+  font-weight: bold
+}
+.CSbSGV-dark .hljs-formula,
+.CSbSGV-dark .hljs-operator,
+.CSbSGV-dark .hljs-params,
+.CSbSGV-dark .hljs-property,
+.CSbSGV-dark .hljs-punctuation,
+.CSbSGV-dark .hljs-tag {
+  /* purposely ignored */
+  
+}
 </style>
 </head>
 <body>
+<script>
+// Based on https://ultimatecourses.com/blog/detecting-dark-mode-in-javascript
+if (window.matchMedia) { // browser supports matchMedia  
+    const fn = isDark => document.body.classList[isDark ? 'add' : 'remove']('CSbSGV-dark');
+    const query = window.matchMedia('(prefers-color-scheme: dark)');
+    fn(query.matches);
+    query.addEventListener('change', event => fn(event.matches));
+}
+</script>
 <h1>How to use <code>my-command</code></h1>
 <p>This is just an example step-by-step guide.</p>
 <h2>Step 1: Check that <code>my-command</code> is installed</h2>

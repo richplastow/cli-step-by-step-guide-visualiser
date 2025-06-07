@@ -55,9 +55,12 @@ if (fileContent.startsWith('# ')) {
    }
 }
 
-// Read the CSS file for styling the HTML output.
-const cssFilePath = './node_modules/highlight.js/styles/vs.css';
-const cssContent = readFileSync(cssFilePath, 'utf-8');
+// Read the CSS file for highlighting code in dark and light modes.
+const cssDarkFilePath = './node_modules/highlight.js/styles/stackoverflow-dark.css';
+const cssDarkRaw = readFileSync(cssDarkFilePath, 'utf-8');
+const cssDarkPrefixed = cssDarkRaw.replace(/\n\.hljs/g, '\n.CSbSGV-dark .hljs');
+const cssLightFilePath = './node_modules/highlight.js/styles/stackoverflow-light.css';
+const cssLightRaw = readFileSync(cssLightFilePath, 'utf-8');
 
 // Transform the markdown content into HTML, and highlighting code blocks.
 const marked = new Marked(
@@ -81,10 +84,32 @@ const htmlContent = `
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
 <style>
-${cssContent}
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  background-color: #ccc;
+  color: #333;
+}
+body.CSbSGV-dark {
+  background-color: #333;
+  color: #ccc;
+}
+${cssLightRaw}
+${cssDarkPrefixed}
 </style>
 </head>
 <body>
+<script>
+// Based on https://ultimatecourses.com/blog/detecting-dark-mode-in-javascript
+if (window.matchMedia) { // browser supports matchMedia  
+    const fn = isDark => document.body.classList[isDark ? 'add' : 'remove']('CSbSGV-dark');
+    const query = window.matchMedia('(prefers-color-scheme: dark)');
+    fn(query.matches);
+    query.addEventListener('change', event => fn(event.matches));
+}
+</script>
 ${bodyContent}
 </body>
 </html>
