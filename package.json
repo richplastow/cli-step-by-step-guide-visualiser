@@ -1,0 +1,24 @@
+{
+  "name": "cli-step-by-step-guide-visualiser",
+  "version": "0.0.1",
+  "description": "Transforms a markdown step-by-step guide into an interactive UI",
+  "author": "Rich Plastow",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "step-by-step-guide",
+    "step-by-step"
+  ],
+  "scripts": {
+    "test": "node test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richplastow/cli-step-by-step-guide-visualiser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/richplastow/cli-step-by-step-guide-visualiser/issues"
+  },
+  "homepage": "https://richplastow.com/cli-step-by-step-guide-visualiser/"
+}
