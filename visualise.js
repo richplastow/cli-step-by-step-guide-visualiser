@@ -3,25 +3,27 @@
  * 
  * @usage
  * 
- * Given a markdown file docs/guides/how-to-use-my-command.md like this:
+ * Given a markdown file docs/guides/how-to-use-some-command.md like this:
  * 
  * ````md
- * # How to use `my-command`
+ * # How to use `some-command`
  * 
  * This is just an example step-by-step guide.
  * 
- * ## Step 1: Check that `my-command` is installed
+ * ## Step 1: Check that `some-command` is installed
  * 
  * ```bash
- * # The `--version` or `-v` flag will makes my-command exit without doing anything.
- * my-command --version
+ * # The `--version` or `-v` flag makes some-command exit without doing anything.
+ * some-command --version
  * # v1.2.3
  * ```
  * ````
  * 
- * Running `node ./visualise.js docs/guides/how-to-use-my-command.md` generates
- * a docs/guides/how-to-use-my-command.html file - a much more user-friendly way
- * to work with the step-by-step guide:
+ * Running `node ./visualise.js docs/guides/how-to-use-some-command.md`
+ * generates a docs/guides/how-to-use-some-command.html file - a much more
+ * user-friendly way to work with the step-by-step guide.
+ * 
+ * Run `open docs/guides/how-to-use-some-command.html` to view in your browser.
  */
 
 import { readFileSync, writeFileSync } from 'fs';
@@ -69,11 +71,32 @@ const marked = new Marked(
     langPrefix: 'hljs language-',
     highlight(code, lang, info) {
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-      return hljs.highlight(code, { language }).value;
+      const modifiedCode = 'if fi ' + code;
+      return hljs.highlight(modifiedCode, { language }).value;
     }
   })
 );
 const bodyContent = marked.parse(fileContent);
+
+// TODO - use the lexer and parser directly to get the tokens, or delete this.
+// const markedOptions = {
+//   ...marked.getDefaults(),
+//   ...markedHighlight({
+// 	emptyLangClass: 'hljs',
+//     langPrefix: 'hljs language-',
+//     highlight(code, lang, info) {
+//       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+//       return hljs.highlight(code, { language }).value;
+//     }
+//   }),
+// };
+// const lexer = new marked.Lexer(markedOptions);
+// const tokens = lexer.lex(fileContent);
+// // ...or...
+// const tokens = marked.lexer(fileContent, markedOptions);
+// console.log(tokens);
+// const bodyContent = marked.parser(tokens);
+// console.log(bodyContent);
 
 // Wrap the HTML content in a basic HTML structure.
 const htmlContent = `
