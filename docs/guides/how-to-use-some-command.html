@@ -18,6 +18,28 @@ body.CSbSGV-dark {
   background-color: #333;
   color: #ccc;
 }
+.CSbSGV-imaginary-os.CSbSGV-landscape {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 576px;
+  height: 324px;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+.CSbSGV-desktop-icon {
+  position: fixed;
+  left: 550px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
+}
+.CSbSGV-desktop-icon:hover {
+  position: fixed;
+  filter: brightness(0.7);
+}
 pre code.hljs {
   display: block;
   overflow-x: auto;
@@ -271,5 +293,17 @@ if (window.matchMedia) { // browser supports matchMedia
 <span data-CSbSGV-kind="command" data-CSbSGV-group="0" data-CSbSGV-token="1" data-CSbSGV-line="0">some-command --version</span>
 <span class="hljs-string" data-CSbSGV-kind="output" data-CSbSGV-group="0" data-CSbSGV-token="2" data-CSbSGV-line="0">v1.2.3</span>
 </code></pre>
+
+<div
+  class="CSbSGV-imaginary-os CSbSGV-landscape"
+  style="background-image: url('asset/wallpaper-landscape-default.jpg');"
+>
+<img src="asset/desktop-icon-trash-default.png" alt="Trash Icon" class="CSbSGV-desktop-icon" style="bottom: 52px;">
+<img src="asset/desktop-icon-app-terminal-default.png" alt="Terminal App Icon" class="CSbSGV-desktop-icon" style="bottom: 96px;">
+<img src="asset/desktop-icon-disk-floppy-default.png" alt="Disk Floppy Icon" class="CSbSGV-desktop-icon" style="bottom: 140px;">
+<img src="asset/desktop-icon-document-default.png" alt="Document Icon" class="CSbSGV-desktop-icon" style="bottom: 184px;">
+<img src="asset/desktop-icon-folder-default.png" alt="Folder Icon" class="CSbSGV-desktop-icon" style="bottom: 228px;">
+<img src="asset/desktop-icon-app-music-default.png" alt="Music App Icon" class="CSbSGV-desktop-icon" style="bottom: 272px;">
+</div>
 </body>
 </html>

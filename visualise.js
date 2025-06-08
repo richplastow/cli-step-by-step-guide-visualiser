@@ -27,10 +27,12 @@
  */
 
 import { readFileSync, writeFileSync } from 'fs';
+import fm from 'front-matter';
 import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from "marked-highlight";
 import { parseShellCodeBlock } from './lib/parse-shell-code-block.mjs';
+import { log } from 'console';
 
 // Read the markdown file from the command line argument.
 const filePath = process.argv[2];
@@ -103,7 +105,62 @@ const marked = new Marked(
     }
   })
 );
+
+// Define an override for Marked's preprocess() function, which removes any
+// frontmatter, and converts it to a JavaScript object.
+let actualFrontmatter = {};
+const frontmatter = {};
+function preprocess(markdown) {
+  const { attributes, body } = fm(markdown);
+  for (const prop in attributes) {
+    if (prop in this.options) {
+      this.options[prop] = attributes[prop];
+    }
+  }
+  actualFrontmatter = attributes;
+  return body;
+}
+marked.use({ hooks: { preprocess } });
+
+// Parse the markdown content into HTML.
 const bodyContent = marked.parse(fileContent);
+
+// Validate frontmatter, and fall back to defaults.
+console.log(actualFrontmatter);
+const icon = {
+    type: 'string',
+    validator: /^asset\/[-_/a-z0-9]+\.(png|webp)$/,
+};
+const image = {
+    type: 'string',
+    validator: /^asset\/[-_/a-z0-9]+\.(jpg|jpeg|png|webp)$/,
+};
+const frontmatterSchema = [
+  ['desktopIconAppMusic', 'asset/desktop-icon-app-music-default.png', icon],
+  ['desktopIconAppTerminal', 'asset/desktop-icon-app-terminal-default.png', icon],
+  ['desktopIconDiskFloppy', 'asset/desktop-icon-disk-floppy-default.png', icon],
+  ['desktopIconDocument', 'asset/desktop-icon-document-default.png', icon],
+  ['desktopIconFolder', 'asset/desktop-icon-folder-default.png', icon],
+  ['desktopIconTrash', 'asset/desktop-icon-trash-default.png', icon],
+  ['wallpaperLandscape', 'asset/wallpaper-landscape-default.jpg', image],
+].map(([identifier, fallback, { type, validator }]) => ({
+  identifier,
+  type,
+  fallback,
+  validator: validator || null,
+}));
+frontmatterSchema
+frontmatterSchema.forEach(({ identifier, type, fallback, validator }) => {
+  if (!(identifier in actualFrontmatter))
+    return frontmatter[identifier] = fallback;
+  const value = actualFrontmatter[identifier];
+  if (typeof value !== type)
+    throw new Error(`visualise.js: Frontmatter property "${identifier}" must be of type ${type}, got ${typeof value}`);
+  if (validator && !validator.test(value))
+    throw new Error(`visualise.js: Frontmatter property "${identifier}" fails ${validator}, got "${value}"`);
+  frontmatter[identifier] = value;
+});
+console.log(`visualise.js: Frontmatter: ${JSON.stringify(frontmatter, null, 2)}`);
 
 // TODO - use the lexer and parser directly to get the tokens, or delete this.
 // const markedOptions = {
@@ -124,6 +181,20 @@ const bodyContent = marked.parse(fileContent);
 // console.log(tokens);
 // const bodyContent = marked.parser(tokens);
 // console.log(bodyContent);
+
+// Build the imaginary OS HTML content.
+const imaginaryOs = `
+<div
+  class="CSbSGV-imaginary-os CSbSGV-landscape"
+  style="background-image: url('${frontmatter.wallpaperLandscape}');"
+>
+<img src="${frontmatter.desktopIconTrash}" alt="Trash Icon" class="CSbSGV-desktop-icon" style="bottom: 52px;">
+<img src="${frontmatter.desktopIconAppTerminal}" alt="Terminal App Icon" class="CSbSGV-desktop-icon" style="bottom: 96px;">
+<img src="${frontmatter.desktopIconDiskFloppy}" alt="Disk Floppy Icon" class="CSbSGV-desktop-icon" style="bottom: 140px;">
+<img src="${frontmatter.desktopIconDocument}" alt="Document Icon" class="CSbSGV-desktop-icon" style="bottom: 184px;">
+<img src="${frontmatter.desktopIconFolder}" alt="Folder Icon" class="CSbSGV-desktop-icon" style="bottom: 228px;">
+<img src="${frontmatter.desktopIconAppMusic}" alt="Music App Icon" class="CSbSGV-desktop-icon" style="bottom: 272px;">
+</div>`;
 
 // Wrap the HTML content in a basic HTML structure.
 const htmlContent = `
@@ -146,6 +217,28 @@ body.CSbSGV-dark {
   background-color: #333;
   color: #ccc;
 }
+.CSbSGV-imaginary-os.CSbSGV-landscape {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 576px;
+  height: 324px;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+.CSbSGV-desktop-icon {
+  position: fixed;
+  left: 550px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
+}
+.CSbSGV-desktop-icon:hover {
+  position: fixed;
+  filter: brightness(0.7);
+}
 ${cssLightRaw}
 ${cssDarkPrefixed}
 </style>
@@ -161,6 +254,7 @@ if (window.matchMedia) { // browser supports matchMedia
 }
 </script>
 ${bodyContent}
+${imaginaryOs}
 </body>
 </html>
 `;

@@ -43,7 +43,7 @@ After cloning the repo, run the following commands to build and test:
 ```bash
 # Install dependencies from NPM.
 npm install
-# added 3 packages, and audited 4 packages in 448ms
+# added 8 packages, and audited 9 packages in 834ms
 # 
 # found 0 vulnerabilities
 
@@ -56,4 +56,4 @@ npm test
 # ✅ All tests passed
 ```
 
-<!-- node_modules/ is 6,235,009 bytes (10.4 MB on disk) for 1,601 items -->
+<!-- node_modules/ is 6,980,695 bytes (11.4 MB on disk) for 1,716 items -->

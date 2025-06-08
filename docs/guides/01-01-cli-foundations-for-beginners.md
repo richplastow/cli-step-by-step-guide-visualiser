@@ -1,3 +1,7 @@
+---
+wallpaperLandscape: "asset/wallpaper-landscape-kitten-in-boot.jpg"
+---
+
 # 01-01 CLI foundations for beginners
 
 This is just an example step-by-step guide.
