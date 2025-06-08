@@ -10,9 +10,9 @@ import { testShCodeBlockToArray } from "./lib/sh-code-block-to-array.mjs";
 // Check that eq() and throws() work as expected.
 eq({a:1}, {a:1}, "eq() should duck-type check objects");
 throws(
-    () => { throw RangeError("Some message") },
-    { message: /Some message/, name: "RangeError" },
-    "throws() should check the error message and type",
+  () => { throw RangeError("Some message") },
+  { message: /Some message/, name: "RangeError" },
+  "throws() should check the error message and type",
 );
 
 // Test library functions.

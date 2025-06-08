@@ -4,7 +4,7 @@
 
 - Version: 0.0.1
 - Created: 7th June 2025 by Rich Plastow
-- Updated: 7th June 2025 by Rich Plastow
+- Updated: 8th June 2025 by Rich Plastow
 - Repo: <https://github.com/richplastow/cli-step-by-step-guide-visualiser>
 - Demo: <https://richplastow.com/cli-step-by-step-guide-visualiser/>
 
@@ -42,7 +42,7 @@ After cloning the repo, run the following commands to build and test:
 
 ```bash
 npm install
-# added 3 packages, and audited 4 packages in 5s
+# added 3 packages, and audited 4 packages in 448ms
 # 
 # found 0 vulnerabilities
 
@@ -54,4 +54,4 @@ npm test
 # ✅ All tests passed
 ```
 
-<!-- node_modules/ is 6,228,861 bytes (10.4 MB on disk) for 1,601 items -->
+<!-- node_modules/ is 6,235,009 bytes (10.4 MB on disk) for 1,601 items -->
