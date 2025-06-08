@@ -5,7 +5,7 @@
  */
 
 import { deepEqual as eq, throws } from "node:assert";
-import { testShCodeBlockToArray } from "./lib/sh-code-block-to-array.mjs";
+import { testParseShellCodeBlock } from "./lib/parse-shell-code-block.mjs";
 
 // Check that eq() and throws() work as expected.
 eq({a:1}, {a:1}, "eq() should duck-type check objects");
@@ -16,7 +16,7 @@ throws(
 );
 
 // Test library functions.
-testShCodeBlockToArray(eq, throws);
+testParseShellCodeBlock(eq, throws);
 
 // Test the main entry point.
 // TODO
