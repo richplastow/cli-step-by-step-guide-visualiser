@@ -41,11 +41,13 @@ Run `open docs/guides/how-to-use-some-command.html` to view in your browser.
 After cloning the repo, run the following commands to build and test:
 
 ```bash
+# Install dependencies from NPM.
 npm install
 # added 3 packages, and audited 4 packages in 448ms
 # 
 # found 0 vulnerabilities
 
+# Run the unit and integration tests.
 npm test
 # > cli-step-by-step-guide-visualiser@0.0.1 test
 # > node test.mjs

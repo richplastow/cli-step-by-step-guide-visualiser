@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to use `some-command`</title>
+<title>01-01 CLI foundations for beginners</title>
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -264,12 +264,22 @@ if (window.matchMedia) { // browser supports matchMedia
     query.addEventListener('change', event => fn(event.matches));
 }
 </script>
-<h1>How to use <code>some-command</code></h1>
+<h1>01-01 CLI foundations for beginners</h1>
 <p>This is just an example step-by-step guide.</p>
-<h2>Step 1: Check that <code>some-command</code> is installed</h2>
-<pre><code class="hljs language-bash"><span class="hljs-section" data-CSbSGV-kind="description" data-CSbSGV-group="0" data-CSbSGV-token="0" data-CSbSGV-line="0">The `--version` or `-v` flag makes some-command exit without doing anything.</span>
-<span data-CSbSGV-kind="command" data-CSbSGV-group="0" data-CSbSGV-token="1" data-CSbSGV-line="0">some-command --version</span>
-<span class="hljs-string" data-CSbSGV-kind="output" data-CSbSGV-group="0" data-CSbSGV-token="2" data-CSbSGV-line="0">v1.2.3</span>
+<h2>Step 1: CLI basics</h2>
+<p>Some description of Step 1 here.</p>
+<pre><code class="hljs language-bash"><span class="hljs-section" data-CSbSGV-kind="description" data-CSbSGV-group="0" data-CSbSGV-token="0" data-CSbSGV-line="0">Print some text to the terminal.</span>
+<span data-CSbSGV-kind="command" data-CSbSGV-group="0" data-CSbSGV-token="1" data-CSbSGV-line="0"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello, world!&quot;</span></span>
+<span class="hljs-string" data-CSbSGV-kind="output" data-CSbSGV-group="0" data-CSbSGV-token="2" data-CSbSGV-line="0">Hello, world!</span>
+</code></pre><h2>Step 2: The working directory</h2>
+<p>Some description of Step 2 here.</p>
+<pre><code class="hljs language-bash"><span class="hljs-section" data-CSbSGV-kind="description" data-CSbSGV-group="0" data-CSbSGV-token="0" data-CSbSGV-line="0">Print the absolute path of the working directory.</span>
+<span data-CSbSGV-kind="command" data-CSbSGV-group="0" data-CSbSGV-token="1" data-CSbSGV-line="0"><span class="hljs-built_in">pwd</span></span>
+<span class="hljs-string" data-CSbSGV-kind="output" data-CSbSGV-group="0" data-CSbSGV-token="2" data-CSbSGV-line="0">/Users/<your-mac-username></span>
+<span class="hljs-section" data-CSbSGV-kind="description" data-CSbSGV-group="1" data-CSbSGV-token="3" data-CSbSGV-line="0">List the contents of the current directory.</span>
+<span data-CSbSGV-kind="command" data-CSbSGV-group="1" data-CSbSGV-token="4" data-CSbSGV-line="0"><span class="hljs-built_in">ls</span></span>
+<span class="hljs-string" data-CSbSGV-kind="output" data-CSbSGV-group="1" data-CSbSGV-token="5" data-CSbSGV-line="0">LICENSE         node_modules</span>
+<span class="hljs-string" data-CSbSGV-kind="output" data-CSbSGV-group="1" data-CSbSGV-token="5" data-CSbSGV-line="1">package.json    README.md</span>
 </code></pre>
 </body>
 </html>

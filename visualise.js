@@ -30,6 +30,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from "marked-highlight";
+import { parseShellCodeBlock } from './lib/parse-shell-code-block.mjs';
 
 // Read the markdown file from the command line argument.
 const filePath = process.argv[2];
@@ -70,9 +71,35 @@ const marked = new Marked(
 	emptyLangClass: 'hljs',
     langPrefix: 'hljs language-',
     highlight(code, lang, info) {
+      // TODO exhaustive list of shell-like languages
       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-      const modifiedCode = 'if fi ' + code;
-      return hljs.highlight(modifiedCode, { language }).value;
+      if (!new Set(['bash', 'console', 'fish', 'shell', 'sh', 'zsh']).has(language)) {
+        return hljs.highlight(code, { language }).value;
+      }
+      const tokens = parseShellCodeBlock(code);
+      console.log(tokens);
+      const html = tokens.map((token, tokenIndex) => {
+        const groupIndex = Math.floor(tokenIndex / 3);
+        const dataAttribs = [
+          `data-CSbSGV-kind="${token.kind}"`,
+          `data-CSbSGV-group="${groupIndex}"`,
+          `data-CSbSGV-token="${tokenIndex}"`,
+        ].join(' ');
+        switch (token.kind) {
+          case 'description':
+            return token.lines.map((line, lineIndex) =>
+              `<span class="hljs-section" ${dataAttribs} data-CSbSGV-line="${lineIndex}">${line}</span>`).join('\n');;
+          case 'command':
+            return token.lines.map((line, lineIndex) =>
+              `<span ${dataAttribs} data-CSbSGV-line="${lineIndex}">${hljs.highlight(line, { language }).value}</span>`);
+          case 'output':
+            return token.lines.map((line, lineIndex) =>
+              `<span class="hljs-string" ${dataAttribs} data-CSbSGV-line="${lineIndex}">${line}</span>`).join('\n');
+          default:
+            throw new Error(`visualise.js: Unknown token kind: ${token.kind}`);
+        }
+      });
+      return html.join('\n');
     }
   })
 );
