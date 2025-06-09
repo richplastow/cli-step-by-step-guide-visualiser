@@ -79,7 +79,6 @@ const marked = new Marked(
         return hljs.highlight(code, { language }).value;
       }
       const tokens = parseShellCodeBlock(code);
-      console.log(tokens);
       const html = tokens.map((token, tokenIndex) => {
         const groupIndex = Math.floor(tokenIndex / 3);
         const dataAttribs = [
@@ -126,7 +125,6 @@ marked.use({ hooks: { preprocess } });
 const bodyContent = marked.parse(fileContent);
 
 // Validate frontmatter, and fall back to defaults.
-console.log(actualFrontmatter);
 const icon = {
     type: 'string',
     validator: /^asset\/[-_/a-z0-9]+\.(png|webp)$/,
@@ -136,13 +134,47 @@ const image = {
     validator: /^asset\/[-_/a-z0-9]+\.(jpg|jpeg|png|webp)$/,
 };
 const frontmatterSchema = [
-  ['desktopIconAppMusic', 'asset/desktop-icon-app-music-default.png', icon],
-  ['desktopIconAppTerminal', 'asset/desktop-icon-app-terminal-default.png', icon],
-  ['desktopIconDiskFloppy', 'asset/desktop-icon-disk-floppy-default.png', icon],
-  ['desktopIconDocument', 'asset/desktop-icon-document-default.png', icon],
-  ['desktopIconFolder', 'asset/desktop-icon-folder-default.png', icon],
-  ['desktopIconTrash', 'asset/desktop-icon-trash-default.png', icon],
-  ['wallpaperLandscape', 'asset/wallpaper-landscape-default.jpg', image],
+  ['desktopCursorArrowLight', 'asset/desktop-icon-arrow-light-default.png', icon],
+  ['desktopCursorPointerDownLight', 'asset/desktop-icon-pointer-down-light-default.png', icon],
+  ['desktopCursorPointerUpLight', 'asset/desktop-icon-pointer-up-light-default.png', icon],
+  ['desktopCursorWaitLight', 'asset/desktop-icon-wait-light-default.png', icon],
+  ['desktopIconAppBrowserLight', 'asset/desktop-icon-app-browser-light-default.png', icon],
+  ['desktopIconAppMusicLight', 'asset/desktop-icon-app-music-light-default.png', icon],
+  ['desktopIconAppTbdLight', 'asset/desktop-icon-app-tbd-light-default.png', icon],
+  ['desktopIconAppVideoChatLight', 'asset/desktop-icon-app-video-chat-light-default.png', icon],
+  ['desktopIconFileAudioLight', 'asset/desktop-icon-file-audio-light-default.png', icon],
+  ['desktopIconFileGenericLight', 'asset/desktop-icon-file-generic-light-default.png', icon],
+  ['desktopIconFileHtmlLight', 'asset/desktop-icon-file-html-light-default.png', icon],
+  ['desktopIconFileImageLight', 'asset/desktop-icon-file-image-light-default.png', icon],
+  ['desktopIconFileScriptLight', 'asset/desktop-icon-file-script-light-default.png', icon],
+  ['desktopIconFileTbdLight', 'asset/desktop-icon-file-tbd-light-default.png', icon],
+  ['desktopIconFileTextLight', 'asset/desktop-icon-file-text-light-default.png', icon],
+  ['desktopIconFileVideoLight', 'asset/desktop-icon-file-video-light-default.png', icon],
+  ['desktopIconLocationFloppyDiskLight', 'asset/desktop-icon-location-floppy-disk-light-default.png', icon],
+  ['desktopIconLocationFolderLight', 'asset/desktop-icon-location-folder-light-default.png', icon],
+  ['desktopIconLocationHardDriveLight', 'asset/desktop-icon-location-hard-drive-light-default.png', icon],
+  ['desktopIconLocationTrashLight', 'asset/desktop-icon-location-trash-light-default.png', icon],
+  ['desktopIconUtilityMediaViewerLight', 'asset/desktop-icon-utility-media-viewer-light-default.png', icon],
+  ['desktopIconUtilitySettingsLight', 'asset/desktop-icon-utility-settings-light-default.png', icon],
+  ['desktopIconUtilityTbdLight', 'asset/desktop-icon-utility-tbd-light-default.png', icon],
+  ['desktopIconUtilityTerminalLight', 'asset/desktop-icon-utility-terminal-light-default.png', icon],
+  ['desktopUiScrollbarDownLight', 'asset/desktop-ui-scrollbar-down-light-default.png', icon],
+  ['desktopUiScrollbarLeftLight', 'asset/desktop-ui-scrollbar-left-light-default.png', icon],
+  ['desktopUiScrollbarRightLight', 'asset/desktop-ui-scrollbar-right-light-default.png', icon],
+  ['desktopUiScrollbarUpLight', 'asset/desktop-ui-scrollbar-up-light-default.png', icon],
+  ['desktopUiThumbBodyHorizontalLight', 'asset/desktop-ui-thumb-body-horizontal-light-default.png', icon],
+  ['desktopUiThumbBodyVerticalLight', 'asset/desktop-ui-thumb-body-vertical-light-default.png', icon],
+  ['desktopUiThumbBottomLight', 'asset/desktop-ui-thumb-bottom-light-default.png', icon],
+  ['desktopUiThumbLeftLight', 'asset/desktop-ui-thumb-left-light-default.png', icon],
+  ['desktopUiThumbRightLight', 'asset/desktop-ui-thumb-right-light-default.png', icon],
+  ['desktopUiThumbTopLight', 'asset/desktop-ui-thumb-top-light-default.png', icon],
+  ['desktopUiThumbTrackHorizontalLight', 'asset/desktop-ui-thumb-track-horizontal-light-default.png', icon],
+  ['desktopUiThumbTrackVerticalLight', 'asset/desktop-ui-thumb-track-vertical-light-default.png', icon],
+  ['desktopUiWindowDismissLight', 'asset/desktop-ui-window-dismiss-light-default.png', icon],
+  ['desktopUiWindowMaxLight', 'asset/desktop-ui-window-max-light-default.png', icon],
+  ['desktopUiWindowMinLight', 'asset/desktop-ui-window-min-light-default.png', icon],
+  ['desktopUiWindowResizeLight', 'asset/desktop-ui-window-resize-light-default.png', icon],
+  ['desktopWallpaperLight', 'asset/desktop-wallpaper-light-default.jpg', image],
 ].map(([identifier, fallback, { type, validator }]) => ({
   identifier,
   type,
@@ -160,7 +192,6 @@ frontmatterSchema.forEach(({ identifier, type, fallback, validator }) => {
     throw new Error(`visualise.js: Frontmatter property "${identifier}" fails ${validator}, got "${value}"`);
   frontmatter[identifier] = value;
 });
-console.log(`visualise.js: Frontmatter: ${JSON.stringify(frontmatter, null, 2)}`);
 
 // TODO - use the lexer and parser directly to get the tokens, or delete this.
 // const markedOptions = {
@@ -186,14 +217,14 @@ console.log(`visualise.js: Frontmatter: ${JSON.stringify(frontmatter, null, 2)}`
 const imaginaryOs = `
 <div
   class="CSbSGV-imaginary-os CSbSGV-landscape"
-  style="background-image: url('${frontmatter.wallpaperLandscape}');"
+  style="background-image: url('${frontmatter.desktopWallpaperLight}');"
 >
-<img src="${frontmatter.desktopIconTrash}" alt="Trash Icon" class="CSbSGV-desktop-icon" style="bottom: 52px;">
-<img src="${frontmatter.desktopIconAppTerminal}" alt="Terminal App Icon" class="CSbSGV-desktop-icon" style="bottom: 96px;">
-<img src="${frontmatter.desktopIconDiskFloppy}" alt="Disk Floppy Icon" class="CSbSGV-desktop-icon" style="bottom: 140px;">
-<img src="${frontmatter.desktopIconDocument}" alt="Document Icon" class="CSbSGV-desktop-icon" style="bottom: 184px;">
-<img src="${frontmatter.desktopIconFolder}" alt="Folder Icon" class="CSbSGV-desktop-icon" style="bottom: 228px;">
-<img src="${frontmatter.desktopIconAppMusic}" alt="Music App Icon" class="CSbSGV-desktop-icon" style="bottom: 272px;">
+<img src="${frontmatter.desktopIconLocationTrashLight}" alt="Trash Icon" class="CSbSGV-desktop-icon" style="bottom: 52px;">
+<img src="${frontmatter.desktopIconUtilityTerminalLight}" alt="Terminal App Icon" class="CSbSGV-desktop-icon" style="bottom: 96px;">
+<img src="${frontmatter.desktopIconLocationFloppyDiskLight}" alt="Floppy Disk Icon" class="CSbSGV-desktop-icon" style="bottom: 140px;">
+<img src="${frontmatter.desktopIconFileTextLight}" alt="Text File Icon" class="CSbSGV-desktop-icon" style="bottom: 184px;">
+<img src="${frontmatter.desktopIconLocationFolderLight}" alt="Folder Icon" class="CSbSGV-desktop-icon" style="bottom: 228px;">
+<img src="${frontmatter.desktopIconAppMusicLight}" alt="Music App Icon" class="CSbSGV-desktop-icon" style="bottom: 272px;">
 </div>`;
 
 // Wrap the HTML content in a basic HTML structure.

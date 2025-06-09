@@ -1,5 +1,5 @@
 ---
-wallpaperLandscape: "asset/wallpaper-landscape-kitten-in-boot.jpg"
+desktopWallpaperLight: "asset/desktop-wallpaper-light-kitten-in-boot.jpg"
 ---
 
 # 01-01 CLI foundations for beginners
