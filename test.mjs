@@ -5,6 +5,7 @@
  */
 
 import { deepEqual as eq, throws } from "node:assert";
+import { testParseMarkdownContent } from "./lib/parse-markdown-content.mjs";
 import { testParseShellCodeBlock } from "./lib/parse-shell-code-block.mjs";
 
 // Check that eq() and throws() work as expected.
@@ -16,6 +17,7 @@ throws(
 );
 
 // Test library functions.
+testParseMarkdownContent(eq, throws);
 testParseShellCodeBlock(eq, throws);
 
 // Test the main entry point.
