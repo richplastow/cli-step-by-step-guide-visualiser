@@ -1,0 +1,31 @@
+/**
+ * This file tells VS Code's TypeScript server to highlight type errors in
+ * JavaScript files in the lib/ directory. You read that right: all our code
+ * is plain JavaScript, not TypeScript, but the developer experience still
+ * benefits from live type checking.
+ */
+{
+    "compilerOptions": {
+        // Allow imports like `import { thirdParty } from 'third-party'`.
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext",
+
+        // Enable error reporting in JavaScript files in the lib directory.
+        // Same as adding `// @ts-check` at the top of every .js file.
+        "checkJs": true,
+  
+        // Generate .d.ts files from the lib JavaScript files. The tsserver
+        // uses these .d.ts files internally - they're not written to the repo.
+        "declaration": true,
+  
+        // Only output d.ts files, don't try to transpile JS files to JS files.
+        "emitDeclarationOnly": true,
+
+        // Allow ES2020 features, like `[1,2,3].at(-1)`.
+        "lib": [ "dom", "es2020" ],
+        "target": "es2020"
+    },
+
+    // Match all JavaScript files in the lib directory.
+    "include": ["lib/**/*.mjs"]
+}
